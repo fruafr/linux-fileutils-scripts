@@ -1,7 +1,7 @@
 # linux-fileutils-scripts
 Linux file utils scripts
 
-- [dumpfstat.sh]: Generate the detailed file stat information for the files contained in the specified directory. Bash.
+- [dumpfstat.sh](dumpfstat.sh): Generate the detailed file stat information for the files contained in the specified directory. Bash.
 
 ## Notes
 - Last updated: 2025-11-16
