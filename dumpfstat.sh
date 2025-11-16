@@ -8,7 +8,7 @@
 # Version:     1.0.0
 # License:     MIT
 #
-# Usage:       ./dumfstat.sh [options] <arguments>
+# Usage:       ./dumpfstat.sh [options] <arguments>
 #
 # Purpose:     Will retrieve stat information for each filepath found in the specified directory.
 #              Will output it to console or as a semi-colon quoted CSV file.
