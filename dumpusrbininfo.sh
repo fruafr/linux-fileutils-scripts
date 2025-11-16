@@ -5,7 +5,7 @@
 # Description: Generate the list of files and symlinks found in /usr/bin and determine the package used to install it.
 # Author:      David HEURTEVENT <david@heurtevent.org>
 # Date:        2025-11-16
-# Version:     1.0.0
+# Version:     1.0.1
 # License:     MIT
 #
 # Usage:       ./dumpusrbininfo.sh [options] <arguments>
@@ -23,6 +23,7 @@
 #        AI assisted code generation (Deekseek v.3.2)
 #
 # Changelog:
+#   2025-11-16 - Version 1.0.1 - Fixed Debian/Ubuntu bug in package recognition. tries with /bin if /usr/bin fails.
 #   2025-11-16 - Version 1.0.0 - Initial release.
 #
 # Exit Codes:
@@ -145,6 +146,14 @@ determine_package() {
     # Try dpkg (Debian/Ubuntu)
     if command -v dpkg >/dev/null 2>&1; then
         local pkg=$(dpkg -S "$filepath" 2>/dev/null | cut -d: -f1)
+        if [[ -n "$pkg" ]]; then
+            echo "$pkg"
+            return
+        fi
+        #bug: try with /bin in older version as an alternative
+        name=$(basename "$filepath")
+        filepath1="/bin/$name"
+        local pkg=$(dpkg -S "$filepath1" 2>/dev/null | cut -d: -f1)
         if [[ -n "$pkg" ]]; then
             echo "$pkg"
             return
