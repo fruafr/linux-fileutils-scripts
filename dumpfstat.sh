@@ -68,7 +68,7 @@ ARGUMENTS:
 
 OUTPUT FORMAT:
     CSV with semicolon separator containing:
-    fullpath;name;pathtype;target;perms;user;group;uid;gid;size;
+    filepath;name;pathtype;target;perms;user;group;uid;gid;size;
     created;changed;modified;accessed
 
 EXAMPLES:
