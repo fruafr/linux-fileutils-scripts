@@ -5,7 +5,7 @@
 # Description: Generate the detailed file stat information for the files contained in the specified directory.
 # Author:      David HEURTEVENT <david@heurtevent.org>
 # Date:        2025-11-16
-# Version:     1.0.0
+# Version:     1.1.0
 # License:     MIT
 #
 # Usage:       ./dumpfstat.sh [options] <arguments>
@@ -22,6 +22,7 @@
 #        AI assisted code generation (Deekseek v.3.2)
 #
 # Changelog:
+#   2025-11-16 - Version 1.1.0 - Changed to report symlink stat, not target stat
 #   2025-11-16 - Version 1.0.0 - Initial release.
 #
 # Exit Codes:
@@ -94,9 +95,9 @@ FIELDS INCLUDED:
     accessed: atime
 
 BEHAVIOR:
-    - By default, rejects directory symlinks for safety
+    - By default, rejects directory if is a symlink
     - Use --follow-symlinks-dir to analyze symlinked directories
-    - Symlinks to files are always followed for metadata collection
+    - Symlinks to files are not followed. Will report symlink info not target info.
     - Output format is CSV with semicolon delimiter and quoted fields
     - Ignores '.' and '..'
 EOF
@@ -213,44 +214,44 @@ get_file_info() {
         target=""
     fi
 
-    # E. Permissions (use -L to get symlink permissions, not target)
-    perms=$(stat -L -c "%a" "$filepath" 2>/dev/null || echo "")
+    # E. Permissions
+    perms=$(stat -c "%a" "$filepath" 2>/dev/null || echo "")
 
-    # F. User (use -L to get symlink ownership, not target)
-    user=$(stat -L -c "%U" "$filepath" 2>/dev/null || echo "")
+    # F. User
+    user=$(stat -c "%U" "$filepath" 2>/dev/null || echo "")
 
-    # G. Group (use -L to get symlink ownership, not target)
-    group=$(stat -L -c "%G" "$filepath" 2>/dev/null || echo "")
+    # G. Group
+    group=$(stat -c "%G" "$filepath" 2>/dev/null || echo "")
 
-    # H. UID (use -L to get symlink ownership, not target)
-    uid=$(stat -L -c "%u" "$filepath" 2>/dev/null || echo "")
+    # H. UID
+    uid=$(stat -c "%u" "$filepath" 2>/dev/null || echo "")
 
-    # I. GID (use -L to get symlink ownership, not target)
-    gid=$(stat -L -c "%g" "$filepath" 2>/dev/null || echo "")
+    # I. GID
+    gid=$(stat -c "%g" "$filepath" 2>/dev/null || echo "")
 
-    # J. Size (use -L to get symlink size, not target)
-    size=$(stat -L -c "%s" "$filepath" 2>/dev/null || echo "")
+    # J. Size
+    size=$(stat -c "%s" "$filepath" 2>/dev/null || echo "")
 
-    # K. Date created (birth time) - use -L for symlinks
-    created=$(stat -L -c "%w" "$filepath" 2>/dev/null || echo "")
+    # K. Date created (birth time)
+    created=$(stat -c "%w" "$filepath" 2>/dev/null || echo "")
     if [ "$created" = "-" ]; then
         created=""
     fi
 
-    # L. Date changed (ctime) - use -L for symlinks
-    changed=$(stat -L -c "%z" "$filepath" 2>/dev/null || echo "")
+    # L. Date changed (ctime)
+    changed=$(stat -c "%z" "$filepath" 2>/dev/null || echo "")
     if [ "$datetimechanged" = "-" ]; then
         changed=""
     fi
 
-    # M. Date modified (mtime) - use -L for symlinks
-    modified=$(stat -L -c "%y" "$filepath" 2>/dev/null || echo "")
+    # M. Date modified (mtime)
+    modified=$(stat -c "%y" "$filepath" 2>/dev/null || echo "")
     if [ "$modified" = "-" ]; then
         modified=""
     fi
 
-    # N. Date accessed (atime) - use -L for symlinks
-    accessed=$(stat -L -c "%x" "$filepath" 2>/dev/null || echo "")
+    # N. Date accessed (atime)
+    accessed=$(stat -c "%x" "$filepath" 2>/dev/null || echo "")
     if [ "$accessed" = "-" ]; then
         accessed=""
     fi
