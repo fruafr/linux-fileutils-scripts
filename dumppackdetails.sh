@@ -4,7 +4,7 @@
 # Script Name: dumppackdetails.sh
 # Description: Dump package details for a Linux system to a quoted CSV file.
 # Author:      David HEURTEVENT <david@heurtevent.org>
-# Date:        2025-11-16
+# Date:        2025-11-17
 # Version:     1.0.0
 # License:     MIT
 #
@@ -23,6 +23,7 @@
 #        AI assisted code generation (Deekseek v.3.2)
 #
 # Changelog:
+#   2025-11-17 - Version 1.0.1 - Changed help.
 #   2025-11-16 - Version 1.0.0 - Initial release.
 #
 # Exit Codes:
@@ -56,7 +57,7 @@
 # Function to display help
 show_help() {
     cat << EOF
-Usage: dumppackdetails.sh [OPTIONS] OUTPUT_FILE
+Usage: $0 [OPTIONS] OUTPUT_FILE
 
 Dump package details for a Linux system to a quoted CSV file.
 
@@ -77,7 +78,7 @@ OUTPUT FORMAT:
     "name";"version";"description"
 
 EXAMPLE:
-    dumppackdetails.sh packdetails.txt
+    $0 packdetails.txt
 EOF
 }
 
