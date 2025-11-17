@@ -4,8 +4,8 @@
 # Script Name: dumppacklist.sh
 # Description: Dump the list of installed packages to a file.
 # Author:      David HEURTEVENT <david@heurtevent.org>
-# Date:        2025-11-16
-# Version:     1.0.0
+# Date:        2025-11-17
+# Version:     1.0.1
 # License:     MIT
 #
 # Usage:       ./dumppacklist.sh [options] <arguments>
@@ -20,6 +20,7 @@
 #        AI assisted code generation (Deekseek v.3.2)
 #
 # Changelog:
+#   2025-11-17 - Version 1.0.1 - Changed help
 #   2025-11-16 - Version 1.0.0 - Initial release.
 #
 # Exit Codes:
@@ -53,7 +54,7 @@
 # Function to display help
 show_help() {
     cat << EOF
-Usage: dumppacklist.sh [OPTIONS] OUTPUT_FILE
+Usage: $0 [OPTIONS] OUTPUT_FILE
 
 Dump the list of installed packages to a file.
 
@@ -70,8 +71,8 @@ ARGUMENTS:
   OUTPUT_FILE   Path to the file where the package list will be saved
 
 Examples:
-  dumppacklist.sh packages.txt
-  dumppacklist.sh --help
+  $0 packages.txt
+  $0 --help
 EOF
 }
 
