@@ -1,14 +1,14 @@
 #!/bin/bash
 
 #
-# Script Name: dumpusrbininfo.sh
+# Script Name: dumpcmdpackinfo.sh
 # Description: Generate the list of files and symlinks found in /usr/bin and determine the package used to install it.
 # Author:      David HEURTEVENT <david@heurtevent.org>
 # Date:        2025-11-16
 # Version:     1.0.1
 # License:     MIT
 #
-# Usage:       ./dumpusrbininfo.sh [options] <arguments>
+# Usage:       ./dumpcmdpackinfo.sh [options] <arguments>
 #
 # Purpose:     Will prepare an alphabetically sorted list of files and symlinks from /usr/bin.
 #              Will determine for each file the package used to install it.
@@ -19,7 +19,7 @@
 #
 # Dependencies: coreutils, distribution package installer
 #
-# Notes: use dumpusrbininfo.sh --help
+# Notes: use dumpcmdpackinfo.sh --help
 #        AI assisted code generation (Deekseek v.3.2)
 #
 # Changelog:
